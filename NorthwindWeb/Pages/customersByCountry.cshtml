@@ -1,0 +1,36 @@
+@page
+@model NorthwindWeb.Pages.CustomersByCountryModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+<div class="row">
+    <h1 class="display-2">Customers</h1>
+    <table class="table">
+        <thead class="thead-inverse">
+            <tr>
+                <th scope="col">Title</th>
+                <th scope="col">Name</th>
+                <th scope="col">Company</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var country in Model.Customers.GroupBy(c => c.Country))
+            {
+                <tr class="table-dark table=sm">
+                    <td>@country.Key</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                @foreach (var cust in @country.ToArray())
+                {
+
+                    <tr class="table-sm">
+                        <td><a asp-page="customer" asp-route-id="@cust.CustomerID">@cust.ContactTitle</a></td>
+                        <td><a asp-page="customer" asp-route-id="@cust.CustomerID">@cust.ContactName</a></td>
+                        <td>@cust.CompanyName</td>
+                    </tr>
+
+                }
+            }
+        </tbody>
+    </table>
+</div>

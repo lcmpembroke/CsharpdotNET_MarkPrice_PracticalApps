@@ -1,0 +1,69 @@
+@page
+@using Packt.Shared
+@model NorthwindWeb.Pages.CustomerModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+<div class="row">
+    <h1 class="display-2">Customer</h1>
+</div>
+<div class="row">
+    <dl>
+        <dt>Customer ID</dt>
+        <dd>@Model.Customer.CustomerID</dd>
+        <dt>Company Name</dt>
+        <dd>@Model.Customer.CompanyName</dd>
+        <dt>Contact</dt>
+        <dd>@Model.Customer.ContactTitle @Model.Customer.ContactName</dd>
+        <dt>Address</dt>
+        <dd>@Model.Customer.Address, @Model.Customer.City, @Model.Customer.Region, @Model.Customer.PostalCode  @Model.Customer.Country</dd>
+        <dt>Phone/Fax</dt>
+        <dd>@Model.Customer.Phone / @Model.Customer.Fax</dd>
+    </dl>
+</div>
+<div class="row">
+    <table class="table">
+        <thead class="thead-inverse">
+            <tr>
+                <th scope="col">OrderID</th>
+                <th scope="col">OrderDate</th>
+                <th scope="col">ShippedDate</th>
+                <th scope="col">ShipVia</th>
+                <th scope="col">Freight</th>
+                <th scope="col">Order Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Order order in Model.Customer.Orders)
+            {
+                <tr>
+                    <td>@order.OrderID</td>
+                    <td>@String.Format("{0:d}", order.OrderDate)</td>
+                    <td>@String.Format("{0:d}", order.ShippedDate)</td>
+                    <td>@order.ShipVia </td>
+                    <td>@order.Freight</td>
+                    <td>
+                        <table>
+                            <tr>
+                                <th>Product</th>
+                                <th>Qty</th>
+                                <th>Unit price</th>
+                                <th>Subtotal</th>
+                            </tr>
+
+                            @foreach (OrderDetail orderDetail in order.OrderDetails)
+                            {
+                                <tr>
+                                    <td>@orderDetail.Product.ProductName</td>
+                                    <td>@orderDetail.Quantity</td>
+                                    <td>@String.Format("{0:C}", orderDetail.UnitPrice)</td>
+                                    <td>@((orderDetail.Quantity * orderDetail.UnitPrice).ToString("c"))</td>
+                                </tr>
+                            }
+                            <tr><td>Order total: </td><td></td><td></td><td>@order.OrderDetails.Sum(od => od.UnitPrice * od.Quantity).ToString("c")</td></tr>
+                        </table>
+                    </td>
+                </tr>
+
+                }
+            </tbody>
+        </table>
+    </div>
