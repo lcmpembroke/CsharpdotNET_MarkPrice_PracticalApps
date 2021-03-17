@@ -1,0 +1,37 @@
+POST https://localhost:5001/api/customers/ HTTP/1.1
+Content-Type: application/json
+Content-Length: 302
+
+{
+  "customerID": "ABCXY",
+  "companyName": "ABC Corp",
+  "contactName": "Andy Bacon",
+  "contactTitle": "Sir",
+  "address": "1 Main Street",
+  "city": "New York",
+  "region": "NY",
+  "postalCode": "90210",
+  "country": "USA",
+  "phone": "(123)-456-5555",
+  "fax": null,
+  "orders": null
+}
+###
+POST https://localhost:5001/api/customers/ HTTP/1.1
+Content-Type: application/json
+Content-Length: 304
+
+{
+  "customerID": "DEFLM",
+  "companyName": "DEF Corp",
+  "contactName": "David Farmer",
+  "contactTitle": "Mr",
+  "address": "1 David Street",
+  "city": "New York",
+  "region": "NY",
+  "postalCode": "90909",
+  "country": "USA",
+  "phone": "(123)-456-3333",
+  "fax": null,
+  "orders": null
+}

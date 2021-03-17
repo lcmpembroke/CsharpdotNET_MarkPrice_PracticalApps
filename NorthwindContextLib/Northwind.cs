@@ -52,7 +52,7 @@ namespace Packt.Shared
       // define a one-to-many relationship
       modelBuilder.Entity<Customer>()
         .HasMany(c => c.Orders)
-        .WithOne(o => o.Customer);
+        .WithOne(o => o.Customer).OnDelete(DeleteBehavior.Cascade);
 
       modelBuilder.Entity<Employee>()
         .Property(c => c.LastName)
@@ -92,6 +92,7 @@ namespace Packt.Shared
       modelBuilder.Entity<Order>()
         .HasOne(o => o.Shipper)
         .WithMany(s => s.Orders)
+        .OnDelete(DeleteBehavior.Cascade)
         .HasForeignKey(o => o.ShipVia);
 
       // the table name has a space in it

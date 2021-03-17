@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Packt.Shared.Product>
+
+@{
+    ViewData["Title"] = "Products that Cost more than ";
+}
+<h2>@ViewData["Title"] @ViewData["PriceThreshold"]</h2>
+<table>
+    <tr>
+        <th>Category Name</th>
+        <th>Supplier's Company Name</th>
+        <th>Product Name</th>
+        <th>Unit price</th>
+        <th>Units in stock</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td>@Html.DisplayFor(modelItem => item.Category.CategoryName) </td>
+        <td>@item.Supplier.CompanyName</td>
+        <td>@item.ProductName</td>
+        <td>@item.UnitPrice</td>
+        <td>@item.UnitsInStock</td>
+    </tr>
+
+    }
+
+
+
+
+</table>
